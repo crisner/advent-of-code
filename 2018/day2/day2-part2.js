@@ -1,0 +1,290 @@
+function inventoryMgmt(str) {
+    let input = str.split('\n');
+    let boxLength = input[0].length;
+    let result = '';
+    for(let i = 0; i < input.length - 1; i++) {
+        let counter = 0; // Store how many letters do not match
+        let index = 0; // Store index value for the letter that is different
+        for(let j = 1; j < input.length - 1; j++) {
+            if(input[i] === input[j]) { // Skip current loop if boxIds are identical
+                break;
+            }
+           
+            for(let k = 0; k < boxLength; k++) {
+                if(input[i][k] !== input[j][k]) {
+                    index = k;
+                    counter++;
+                }
+                if(counter > 1) { // Skip loop if counter is over 1
+                    break;
+                }
+            }
+            if(counter === 1) {
+                result = input[i].replace(input[i][index], ''); // Return common letters
+            }
+            counter = 0;
+        }
+    }
+    console.log(result);
+    return result;
+}
+
+// Input
+inventoryMgmt(`abcde
+fghij
+klmno
+pqrst
+fguij
+axcye
+wvxyz`); // 'fgij'
+
+inventoryMgmt(`rmyxgdlihczskunpfwbgqoeybv
+rmyxgdlksczskunpfwbjqkeatv
+rmybgdxibczskunpfwbjqoeatv
+rmyxgdlirczskuopfwbjqzeatv
+rmyxedlrhczskunpfwbyqoeatv
+rmyxfdlicczskunpfwbxqoeatv
+rmyxgvlihkzskunpfwbsqoeatv
+rmyxgdaihczvkunpfwblqoeatv
+nmyxgolihczskunpfwbjqieatv
+rhyxgdcihczskunifwbjqoeatv
+rmfxgdlihczskunpfwbvqgeatv
+smyxgdlihczskunsiwbjqoeatv
+rmyxgdcihcxskunpfwbrqoeatv
+rmyxgdlihczckuiqfwbjqoeatv
+rmyxxdwihczskunifwbjqoeatv
+rkzxgdlihczskunpfwhjqoeatv
+rmypgdlihczskunpfwbrqoeafv
+rmyxgplihczvkunpkwbjqoeatv
+rqyxgdlihdzskjnpfwbjqoeatv
+rmyxgdlihczskqnpswbjqoeaov
+mcyxgdlihczmkunpfwbjqoeatv
+rmyxgdlohczspunpowbjqoeatv
+tmyxgdlihczskunpfwbeqoeltv
+rmyxgdlibccskunpfwbjqoegtv
+rmyxgdlehczsaunpfwboqoeatv
+rmaxgdlihczseunpfwbjqojatv
+rmyxgdlijczskynpfwbjboeatv
+kmlxgdlilczskunpfwbjqoeatv
+rmsxgdlshczskenpfwbjqoeatv
+rmbxgdlihcmskgnpfwbjqoeatv
+rayxgdlihczskunpfwbjqoeaef
+umyxgdlisczskunpfdbjqoeatv
+rmyxgdlihczskunsfwbjqieatg
+rmbxgdlihczhkunpfwbjqoeamv
+rmyxgdlihczskeypfwbjqxeatv
+rmyxgkrihczskunptwbjqoeatv
+rmyxgdlihczskunpawbjqoexiv
+rmyxgdlihcrskqnpfwbjqceatv
+rmyxgblihczskjnpfwbjqieatv
+rmyggdlidczskunofwbjqoeatv
+rmyxgdlghczskunphwbjqomatv
+rmqxgdbihczskunpfnbjqoeatv
+rvyxgdlihczsgunpfwbjqoeanv
+royxgdlnhczskqnpfwbjqoeatv
+rmyxgdlihczskugpfwbkqreatv
+rmyxfdlihczskunppwejqoeatv
+rqyxgdlipczskunpfwbjqoeqtv
+rmyxgdlicczskunpnwbjqotatv
+rmyxodlihczskxnpfwijqoeatv
+rmyxrdyihczskunpftbjqoeatv
+rmtxgdyihwzskunpfwbjqoeatv
+tmyxcdliiczskunpfwbjqoeatv
+rmyxgdlihczskmnpfwbjjoeadv
+rmyxgdnihczskunpqwbjqojatv
+bmyxgdlihczskcnpfwboqoeatv
+rmysgdlihcyskudpfwbjqoeatv
+rmyxgdtihczsmuupfwbjqoeatv
+rmyxgdlihczssunpffbjqolatv
+rmyogdlihczsklnpfwbjqoxatv
+rmyxgjlihczskunpfwsjqoyatv
+rmyxgalshczskunpfwbuqoeatv
+rmyfgdlihczskunqfwbiqoeatv
+tmyxgdlihczskunotwbjqoeatv
+rmyxpdzihczskuopfwbjqoeatv
+rmyfgdlihczskunpfrbgqoeatv
+rmyxgdlwhczskhnofwbjqoeatv
+rmyxgdlihczsmudpfrbjqoeatv
+rmyxgdlihczokanpfwbjqooatv
+rmyxrdlihczskunppwjjqoeatv
+rmyxgdjihczskwnpowbjqoeatv
+mmyxgdlihczikunpfwbjqoeamv
+rmyxgflihczshunpwwbjqoeatv
+rmytghlihczskunpfwbjqoeatk
+rmyxgdlipczmbunpfwbjqoeatv
+rmyxgdlihczkkonpfwbjqomatv
+rmfxgslihczskunpfwujqoeatv
+dmyxgdlihczykunqfwbjqoeatv
+rmyxgalihcbskunpgwbjqoeatv
+rmyxgdlinczqkunpfwbjqopatv
+rmyxgdlihwzslunplwbjqoeatv
+rmypgdlihczskdtpfwbjqoeatv
+rmsxgdxieczskunpfwbjqoeatv
+rmyxgdlihczskwnpfxrjqoeatv
+rmyxgdlihzzskunpflbjpoeatv
+rslxgdlihczsnunpfwbjqoeatv
+rmyxgdlmcczskunpfwbjqoealv
+fmkxgdbihczskunpfwbjqoeatv
+rmyxgdiigczxkunpfwbjqoeatv
+rjyxgnlqhczskunpfwbjqoeatv
+ymyxgolihczskunpfmbjqoeatv
+hmyxgdlihczskuncfwbjqoejtv
+rmyxgqlihczzkunpfwbjqojatv
+rmgfgdlihczskunpfwbjgoeatv
+rmyxgdlfhczskunpfwbjqweaxv
+rmoxtdlihczskunpfwdjqoeatv
+ruyxgdlihczskunpfmbjnoeatv
+rmnxgflehczskunpfwbjqoeatv
+rmyugdlihczskunpfwfjroeatv
+rmyxddbihczskunpfwbjqoeutv
+rmyxgdlipczskunofbbjqoeatv
+gmyxgdlihczskunpfkbjroeatv
+rmyxgdllhcpskunpfwbjqqeatv
+rmyxgdlihchskunpfwbjqoelcv
+mmyxldlihczskuncfwbjqoeatv
+ryyxgdlxhczskcnpfwbjqoeatv
+rmyxpdlihczskyntfwbjqoeatv
+rmhxgdlibczskwnpfwbjqoeatv
+rmyxgdlihczskunpfwojbkeatv
+qmyxgdlihczskunpfwbjqoyatm
+rmyxgdlzhczskunpfwbjqoealr
+rmyegdliqczskunpfgbjqoeatv
+umyxgdlihczsvunpfwbfqoeatv
+rmyxgdoihfzskunpfmbjqoeatv
+rmyxgdlihcdskanpmwbjqoeatv
+rmyxgdyihczskunpfrbjqoeaov
+rcyxgdlihczskuegfwbjqoeatv
+rmyxgdlihgwskunpfwbjkoeatv
+rpyxgdlihmzskunpfwbjqoeatp
+rmyxgdlihhzskunpfwbjaoeapv
+rmyxgdsrhczskunpflbjqoeatv
+rmrxgdlihczskunpvwbjqoeabv
+rmcxgylihczskunpfwbjyoeatv
+rmkxgdlyhczsounpfwbjqoeatv
+rmyxgdqihczskunmfwbjqoratv
+rmyxgdlihczskunpfibjqofath
+rmyxgdliqczskunpqwbjqoeaev
+rmhxgdlizcjskunpfwbjqoeatv
+rmyxgdlfhcwskunpfwbjqoeaqv
+rmyxgdlchclskunpfwbdqoeatv
+rmyxgdluhczswunpfwbjqoeatt
+rmyxgdlzqczskunpfwbjqoeatq
+rmdxgdlihszskunpfwbwqoeatv
+rmyxgdlihszsvunpfwbjqueatv
+rmyxgdlhhczskunpffbjaoeatv
+rmrxgdlphczskunpfwbjqreatv
+hmyngdxihczskunpfwbjqoeatv
+rmyxgdlizczpkunpfwbyqoeatv
+rmyxbdlihyzskunlfwbjqoeatv
+rmyxgdlipczsqunnfwbjqoeatv
+rmyxgdlihcsskunpfxbjqoaatv
+rmyxgdljhcznkunpfwbjqfeatv
+rmaxgdlihczspunpfwbjqoqatv
+rsyxgdlihczskunpfwbjqoehcv
+rmyxgjlicczskunpfwbjqoeitv
+rwymgvlihczskunpfwbjqoeatv
+rmyxgdlipfzskunpfwbjqweatv
+rmyxgglihczskunpgwbjqoealv
+royxgdlihczskhnpfwbyqoeatv
+rmyxgdlihczskvnpfabkqoeatv
+rmyxgdlihczskunpfwhjwzeatv
+jlyxgdlihczskunpfwbjqzeatv
+rmyxgdlihccskunpfwwjqopatv
+rmyxgxlihczskuupfwbjqoeahv
+rmyxgdcihcbskungfwbjqoeatv
+tmyxgdlihczskunpfwbjmoeftv
+rkyxgdlioczskmnpfwbjqoeatv
+rmyxgdlrhczskulpfwbjaoeatv
+rmysgdlihczikunphwbjqoeatv
+rmyxgdlihczskuvpfwbjqoeyty
+fmyxgdlihczscunpfqbjqoeatv
+rfyxgdlihzzrkunpfwbjqoeatv
+rmyxgdlikczskunpfwbjqolath
+rmyxqdlihjzskunpfwbjqoeamv
+rmuxodiihczskunpfwbjqoeatv
+rmyygdliucuskunpfwbjqoeatv
+rmyxgdliwczskuppawbjqoeatv
+rmyxgdlihczskunprwbjqgehtv
+imyvgdlihczskunpfwbjqouatv
+rgyxgdluhczskunpflbjqoeatv
+rmgxgdlihczsdunpfwwjqoeatv
+gdyxgdlihczskunpfwbjqoeavv
+rmyxgdlihczskunpfwljjoektv
+rmexgdlihczskunpfwxjqoeytv
+rmyxqdlihcyskuwpfwbjqoeatv
+rmyxgdlihczskunpfiyjqcebtv
+amyngdlihczskunpfwbjqseatv
+rmzxgdlihczykubpfwbjqoeatv
+rmyxgdlihczhkuopfwbjsoeatv
+rmyxgdlihczskunpfwbaqowztv
+rmgxgdlihczslunpfwbjeoeatv
+rmytgdlzhczskunrfwbjqoeatv
+rmyxgdtihczskunafobjqoeatv
+rmyxgdlihczskuflfbbjqoeatv
+rmdxgdlihczskunpfwbjqoealj
+rbyxgdlihczskuppdwbjqoeatv
+rmyxhdiihcwskunpfwbjqoeatv
+rmmggdlfhczskunpfwbjqoeatv
+rmbxgblihczskuypfwbjqoeatv
+rmyxgslihczsjunpjwbjqoeatv
+rmyxgdlohczsaunpfwbjboeatv
+rmaxgdhihczskunpfwbjooeatv
+rmyxidlihczskunpfgbuqoeatv
+rmyxgdlihfzckznpfwbjqoeatv
+rmaqgdpihczskunpfwbjqoeatv
+rmyvgdlirczskunpfobjqoeatv
+rmdxgdlihczlkunpxwbjqoeatv
+rmyxgdlihczseunpfwbjvdeatv
+rmyxgdlihczskuhpfwbjqneath
+rmyxrdlihciskunpfwbjqoratv
+rmyxgdmihczsqunpftbjqoeatv
+rmyxgdlbhczskulpfbbjqoeatv
+rmoxgdlihczskunpfwbjqoeesv
+rmyxgdlihczskuijfwejqoeatv
+rmyxgdlihczskunpfwnkqoxatv
+rmyxgdvihmzskuupfwbjqoeatv
+rkyxedlihczskunpfcbjqoeatv
+rmyxgdjihczskunprwbjqieatv
+omyxgqgihczskunpfwbjqoeatv
+rmyxydlihczskunpfwkjqoentv
+rmbxgdlicczskunpfwbjqteatv
+emyxgdlihczskugpfwbjqneatv
+dmyxgflihczskunpfwbjqjeatv
+umyxgdlihczskunpfwbjloextv
+rmyxgdlihczsbunpfwbyqpeatv
+rmyxgdrihczsvunpcwbjqoeatv
+qmyxgdlihcwsknnpfwbjqoeatv
+ymyxgdlihczskunpfsbjqowatv
+rmyxgdlbhczskunpnvbjqoeatv
+rmyxfdlixczskunpfwbjqoertv
+rmyygdlihszrkunpfwbjqoeatv
+rmyxgxlihcpskunpfwbjqoeanv
+rmyxgdlihczskjnpfwbjqoprtv
+rmyxgdlisczfkunpfwbjqoeath
+rmyxgdlihczskunpfkbjqoeaji
+rmyxgylihczskunpfwbfqoeatl
+rmsxgdbihczskunpfwtjqoeatv
+smyxgdlihczskunpfwbjqcwatv
+rmyxgdlihczskunppjljqoeatv
+rmyxgdlihczskulpfdbjooeatv
+rmyxgdlihczskunpfibjqcebtv
+rmyxadlihczskunpgwbjyoeatv
+rmyxgdlihczdkunpvwbjqoeytv
+rmyxgdlihcvskunpfwbjxohatv
+rmyxgplihczskunpfgbjqoeauv
+rmyxgdlihcysrunmfwbjqoeatv
+rmyygdlihczskunpfwbjqvewtv
+rmyxgdlihczsmunpfwdjnoeatv
+rmyxgdbibczskunpfwbjuoeatv
+rmyfgdlihczskubpfwbjqoeatp
+rmyxgdlihczskuopfzijqoeatv
+rmyqgdlihczskunpwwbjqoeanv
+imyxgdlihczskunpfwbjqoqytv
+rmyxgdlixcoskbnpfwbjqoeatv
+rmyxgrlihccskunpfwbjqteatv
+rdyxgdlihcpskunpfwbjqoratv
+rmyxgdlihkzskunpfwbjmoeatj
+rmyxgslihczskcnpfjbjqoeatv
+rmyxgdlihczsqunqfwdjqoeatv
+rjyxgdlyhczbkunpfwbjqoeatv
+rmyxudlihczjkunpfwbjqzeatv`);
